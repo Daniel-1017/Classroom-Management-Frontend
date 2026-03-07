@@ -1,3 +1,4 @@
+import { Subject } from "@/types";
 import { GraduationCap, School } from "lucide-react";
 
 export const USER_ROLES = {
@@ -113,5 +114,35 @@ export const subjects = [
     id: 4,
     name: "Chemistry",
     code: "CHEM",
+  },
+];
+
+export const MOCK_SUBJECTS: Subject[] = [
+  {
+    id: 1,
+    code: "CS101",
+    name: "Introduction to Computer Science",
+    department: "Computer Science & Engineering",
+    description:
+      "An entry-level course covering the fundamentals of algorithmic thinking, data structures, and basic programming logic using Python.",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 2,
+    code: "BIO204",
+    name: "Genetics and Evolution",
+    department: "Biological Sciences",
+    description:
+      "A comprehensive study of hereditary patterns, DNA replication, and the mechanisms of evolutionary change across different species.",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 3,
+    code: "ECON302",
+    name: "Macroeconomic Theory",
+    department: "Economics",
+    description:
+      "An advanced look at national income determination, inflation, unemployment, and the impact of fiscal and monetary policies on global markets.",
+    createdAt: new Date().toISOString(),
   },
 ];
