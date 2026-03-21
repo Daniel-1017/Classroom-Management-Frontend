@@ -1,6 +1,24 @@
 import { BACKEND_BASE_URL } from "@/constants";
 import { ListResponse } from "@/types";
 import { CreateDataProviderOptions, createDataProvider } from "@refinedev/rest";
+import { HttpError } from "node_modules/@refinedev/core/dist/contexts/data/types";
+
+const buildHttpError = async (response: Response): Promise<HttpError> => {
+  let message = "Request failed";
+
+  try {
+    const payload = (await response.json()) as { message?: string };
+
+    if (payload?.message) message = payload.message;
+  } catch {
+    // Ignore errors
+  }
+
+  return {
+    message,
+    statusCode: response.status,
+  };
+};
 
 const options: CreateDataProviderOptions = {
   getList: {
@@ -27,6 +45,8 @@ const options: CreateDataProviderOptions = {
       return params;
     },
     mapResponse: async (response) => {
+      if (!response.ok) throw await buildHttpError(response);
+
       const payload: ListResponse = await response.json();
       return payload.data ?? [];
     },
